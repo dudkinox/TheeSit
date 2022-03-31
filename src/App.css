@@ -6,6 +6,12 @@ success: "#EED9A7",
 light: "#F0F0F0",
 dark: "#3E3E3E", 
 */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Thai+Looped:wght@400;500&family=Noto+Sans+Thai:wght@300&display=swap");
+
 body {
   background-color: #f0f0f0;
+}
+
+* {
+  font-family: "Noto Sans Thai Looped", sans-serif;
 }
