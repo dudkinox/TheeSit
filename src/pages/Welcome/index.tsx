@@ -1,4 +1,4 @@
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import MicIcon from "../../assets/icons/mic-icon.svg";
 import SpaceIcon from "../../assets/icons/space-icon";
 import Icons from "../../components/Icons";
