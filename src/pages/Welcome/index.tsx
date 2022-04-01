@@ -9,14 +9,14 @@ import SpeechRecognition, {
 } from "react-speech-recognition";
 import MuteIcon from "../../assets/icons/mute-icon.svg";
 import { useEffect, useState } from "react";
-import { useSpeechSynthesis } from "react-speech-kit";
+// import { useSpeechSynthesis } from "react-speech-kit";
 
 export default function Welcome() {
   const { transcript, listening, browserSupportsSpeechRecognition } =
     useSpeechRecognition();
   const [email, setEmail] = useState("");
 
-  const { speak } = useSpeechSynthesis();
+  // const { speak } = useSpeechSynthesis();
 
   const goQuestions = () => {
     if (email !== "") {
