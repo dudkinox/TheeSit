@@ -9,6 +9,7 @@ import SpeechRecognition, {
 } from "react-speech-recognition";
 import MuteIcon from "../../assets/icons/mute-icon.svg";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 // import { useSpeechSynthesis } from "react-speech-kit";
 
 export default function Welcome() {
@@ -17,10 +18,11 @@ export default function Welcome() {
   const [email, setEmail] = useState("");
 
   // const { speak } = useSpeechSynthesis();
+  const navigate = useNavigate();
 
   const goQuestions = () => {
     if (email !== "") {
-      alert("เข้าสู่แบบทดสอบ");
+      navigate("/questions");
     } else {
       alert("กรุณากรอกอีเมล์");
     }
