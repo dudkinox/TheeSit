@@ -34,7 +34,7 @@ export default function Questions({
   };
   const processQuestion4 = (value: string) => {
     //   จับหมวดหมู่ปฏิเสธ
-    setStatus(true);
+    if (value !== "") setStatus(true);
   };
   const processQuestion5 = (value: string) => {
     //   จับตัวเลข
@@ -55,15 +55,15 @@ export default function Questions({
   };
   const processQuestion8 = (value: string) => {
     //   จับหมวดหมู่สาขา
-    setPoint(point);
+    if (value !== "") setPoint(point);
   };
   const processQuestion9 = (value: string) => {
-    //   จับหมวดหมู่สาขา
-    setPoint(point);
+    //   จับหมวดหมู่สาขา และจับตัวเลขจำนวนชั่วโมง
+    if (value !== "") setPoint(point + Number(value));
   };
   const processQuestion10 = (value: string) => {
-    //   จับหมวดหมู่สาขา และจับตัวเลขจำนวนชั่วโมง
-    setPoint(point);
+    //   จับตัวเลข
+    if (value !== "") setPoint(point + Number(value));
   };
 
   useEffect(() => {
