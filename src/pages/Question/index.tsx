@@ -1,22 +1,60 @@
-import { Col, Form, Row } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import Icons from "../../components/Icons";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 import MuteIcon from "../../assets/icons/mute-icon.svg";
 import MicIcon from "../../assets/icons/mic-icon.svg";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import Questions from "../../components/Questions";
 
 export default function QuestionPage() {
   const { transcript, listening } = useSpeechRecognition();
-
+  const [numberQuestion, setNumberQuestion] = useState(0);
   const [point, setPoint] = useState(0);
 
-  useEffect(() => {
-    if (transcript !== "" && !listening) {
-      setPoint(Number(transcript) / 360);
-    }
-  }, [listening, transcript]);
+  const questionsList = [
+    {
+      no: "1",
+      text: "ผู้สัมภาษณ์เรียนที่มหาลัยแห่งไหนครับ",
+    },
+    {
+      no: "2",
+      text: "ผู้สัมภาษณ์มีสัญชาติประเทศอะไรครับ",
+    },
+    {
+      no: "3",
+      text: "ผลการเรียนเกรดเฉลี่ยเท่าไหร่ครับ",
+    },
+    {
+      no: "4",
+      text: "เคยสำเร็จการศึกษาจากที่มหาลัยใดมาก่อนหรือไม่ครับ",
+    },
+    {
+      no: "5",
+      text: "ครอบครัวมีรายได้ 1 ปี ทั้งหมดเท่าไหร่ครับ",
+    },
+    {
+      no: "6",
+      text: "ผู้สัมภาษณ์มีอายุเท่าไหร่ครับ",
+    },
+    {
+      no: "7",
+      text: "ผู้สัมภาษณ์เรียนอยู่สาขาอะไรครับ",
+    },
+    {
+      no: "8",
+      text: "ทำไมถึงเลือกมาเรียนสาขา {ตัวแปร}",
+    },
+    {
+      no: "9",
+      text: "ท่านเคยทำประโยชน์ต่อสังคม / สาธารณะ อะไรบ้าง รวมทั้งสิ้น กี่ ชั่วโมงครับ",
+    },
+    {
+      no: "10",
+      text: "ผู้สัมภาษณ์มีจำนวนกี่คนในครอบครัว",
+    },
+  ];
 
   return (
     <div>
@@ -40,23 +78,27 @@ export default function QuestionPage() {
           )}
         </Col>
       </Row>
-      <h1>Question</h1>
-      <h2>รายได้ครอบครัวต่อปี?</h2>
-      <Form>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-          <Form.Control
-            type="text"
-            value={transcript}
-            onChange={(e) => {
-              console.log(e.target.value);
-
-              setPoint(Number(e.target.value) / 360000);
-            }}
-            placeholder="จำนวน"
-          />
-        </Form.Group>
-      </Form>
-      {point > 0 ? `คะแนน = ${point}` : <></>}
+      <Container>
+        <Questions
+          transcript={transcript}
+          point={point}
+          questions={questionsList[numberQuestion].text}
+          no={questionsList[numberQuestion].no}
+          setPoint={setPoint}
+        />
+        <Row className="h-50">
+          <Col xs={12} className="text-center">
+            <Button
+              className="col-4"
+              onClick={() => {
+                setNumberQuestion(numberQuestion + 1);
+              }}
+            >
+              ถัดไป
+            </Button>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 }
