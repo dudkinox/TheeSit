@@ -25,10 +25,18 @@ export default function Questions({
   setStatus,
 }: QuestionsProps) {
   const processQuestion1 = (value: string) => {
-    if (value.includes("จันทรเกษม")) setStatus(true);
+    if (value.includes("จันทรเกษม")) {
+      setStatus(true);
+    } else {
+      setStatus(false);
+    }
   };
   const processQuestion2 = (value: string) => {
-    if (value.includes("ไทย")) setStatus(true);
+    if (value.includes("ไทย")) {
+      setStatus(true);
+    } else {
+      setStatus(false);
+    }
   };
   const processQuestion3 = (value: string) => {
     //   จับตัวเลข
@@ -40,7 +48,7 @@ export default function Questions({
   };
   const processQuestion5 = (value: string) => {
     //   จับตัวเลข
-    if (value !== "") setPoint(point + Number(value) / 360000);
+    if (value !== "") setPoint(point + Number(value) / 360);
   };
   const processQuestion6 = (value: string) => {
     //   จับตัวเลข
