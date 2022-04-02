@@ -4,8 +4,39 @@ import SpaceIcon from "../../assets/icons/space-icon";
 import Icons from "../../components/Icons";
 import AI from "../../assets/png/นั่ง1.svg";
 import VoiceIcon from "../../assets/icons/voice-icon.svg";
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from "react-speech-recognition";
+import MuteIcon from "../../assets/icons/mute-icon.svg";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Welcome() {
+  const { transcript, listening, browserSupportsSpeechRecognition } =
+    useSpeechRecognition();
+  const [email, setEmail] = useState("");
+
+  const navigate = useNavigate();
+
+  const goQuestions = () => {
+    if (email !== "") {
+      navigate("/questions");
+    } else {
+      alert("กรุณากรอกอีเมล์");
+    }
+  };
+
+  useEffect(() => {
+    if (transcript === "เริ่มสัมภาษณ์" && !listening) {
+      goQuestions();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [listening, transcript]);
+
+  if (!browserSupportsSpeechRecognition) {
+    return <span>ไม่รองรับการโต้ตอบ AI ลองใช้ Google Chrome</span>;
+  }
+
   return (
     <>
       <Row>
@@ -13,18 +44,32 @@ export default function Welcome() {
           <SpaceIcon />
         </Col>
         <Col xs={1}>
-          <Icons className="my-3" icon={MicIcon} alt="microphone" />
+          {listening ? (
+            <Icons
+              onClick={SpeechRecognition.startListening}
+              className="my-3"
+              icon={MicIcon}
+              alt="microphone"
+            />
+          ) : (
+            <Icons
+              onClick={SpeechRecognition.startListening}
+              className="my-3"
+              icon={MuteIcon}
+              alt="microphone"
+            />
+          )}
         </Col>
       </Row>
-      <Row className="mt-5">
+      <Row>
         <Col
           xs={6}
           className="text-center"
           style={{
             position: "relative",
             height: "83px",
-            left: "273px",
-            top: "213px",
+            left: "100px",
+            top: "100px",
           }}
         >
           <Container>
@@ -48,9 +93,11 @@ export default function Welcome() {
                 boxShadow: "0px 4px 23px rgba(0, 0, 0, 0.41)",
                 borderRadius: "52.5px",
               }}
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
             />
-            <Row className="mt-5">
-              <Col xs={8}>
+            <Row className="mt-4">
+              <Col xs={5}>
                 <Icons className="mt-2 " icon={VoiceIcon} alt="VoiceIcon" />
                 <span
                   style={{
@@ -61,7 +108,8 @@ export default function Welcome() {
                     textShadow: "0px 4px 4px rgba(0, 0, 0, 0.35)",
                   }}
                 >
-                  &emsp;พูดว่า "เริ่มสัมภาษณ์"
+                  &emsp;พูดว่า "
+                  {transcript === "" ? "เริ่มสัมภาษณ์" : transcript}"
                 </span>
               </Col>
             </Row>
