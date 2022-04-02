@@ -9,9 +9,10 @@ import { useState } from "react";
 import Questions from "../../components/Questions";
 
 export default function QuestionPage() {
-  const { transcript, listening } = useSpeechRecognition();
+  const { transcript, listening, resetTranscript } = useSpeechRecognition();
   const [numberQuestion, setNumberQuestion] = useState(0);
   const [point, setPoint] = useState(0);
+  const [major, setMajor] = useState("");
 
   const questionsList = [
     {
@@ -44,7 +45,7 @@ export default function QuestionPage() {
     },
     {
       no: "8",
-      text: "ทำไมถึงเลือกมาเรียนสาขา {ตัวแปร}",
+      text: `ทำไมถึงเลือกมาเรียนสาขา ${major} ครับ`,
     },
     {
       no: "9",
@@ -85,6 +86,8 @@ export default function QuestionPage() {
           questions={questionsList[numberQuestion].text}
           no={questionsList[numberQuestion].no}
           setPoint={setPoint}
+          major={major}
+          setMajor={setMajor}
         />
         <Row className="h-50">
           <Col xs={12} className="text-center">
@@ -92,6 +95,7 @@ export default function QuestionPage() {
               className="col-4"
               onClick={() => {
                 setNumberQuestion(numberQuestion + 1);
+                resetTranscript();
               }}
             >
               ถัดไป
