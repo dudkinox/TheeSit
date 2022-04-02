@@ -10,14 +10,12 @@ import SpeechRecognition, {
 import MuteIcon from "../../assets/icons/mute-icon.svg";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import { useSpeechSynthesis } from "react-speech-kit";
 
 export default function Welcome() {
   const { transcript, listening, browserSupportsSpeechRecognition } =
     useSpeechRecognition();
   const [email, setEmail] = useState("");
 
-  // const { speak } = useSpeechSynthesis();
   const navigate = useNavigate();
 
   const goQuestions = () => {
@@ -63,15 +61,15 @@ export default function Welcome() {
           )}
         </Col>
       </Row>
-      <Row className="mt-5">
+      <Row>
         <Col
           xs={6}
           className="text-center"
           style={{
             position: "relative",
             height: "83px",
-            left: "273px",
-            top: "213px",
+            left: "100px",
+            top: "100px",
           }}
         >
           <Container>
@@ -98,8 +96,8 @@ export default function Welcome() {
               onChange={(e) => setEmail(e.target.value)}
               value={email}
             />
-            <Row className="mt-5">
-              <Col xs={8}>
+            <Row className="mt-4">
+              <Col xs={5}>
                 <Icons className="mt-2 " icon={VoiceIcon} alt="VoiceIcon" />
                 <span
                   style={{
