@@ -69,7 +69,7 @@ export default function Questions({
   };
   const processQuestion9 = (value: string) => {
     //   จับหมวดหมู่สาขา และจับตัวเลขจำนวนชั่วโมง
-    if (value !== "") setPoint(point + Number(value));
+    if (value !== "") setPoint(point);
   };
   const processQuestion10 = (value: string) => {
     //   จับตัวเลข

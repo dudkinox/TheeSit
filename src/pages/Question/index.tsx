@@ -18,7 +18,7 @@ export default function QuestionPage() {
   const questionsList = [
     {
       no: "1",
-      text: "ผู้สัมภาษณ์เรียนที่มหาลัยแห่งไหนครับ",
+      text: "สถานะครอบครัวผู้สัมภาษณ์เป็็นอย่างไรครับ",
     },
     {
       no: "2",
@@ -38,7 +38,7 @@ export default function QuestionPage() {
     },
     {
       no: "6",
-      text: "ผู้สัมภาษณ์มีอายุเท่าไหร่ครับ",
+      text: "ผู้สัมภาษณ์ทำงานพิเศษอะไรครับ",
     },
     {
       no: "7",
