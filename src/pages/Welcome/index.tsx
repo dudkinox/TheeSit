@@ -10,25 +10,23 @@ import SpeechRecognition, {
 import MuteIcon from "../../assets/icons/mute-icon.svg";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import WelcomeController from "../../controllers/WelcomeController";
 
 export default function Welcome() {
   const { transcript, listening, browserSupportsSpeechRecognition } =
     useSpeechRecognition();
   const [email, setEmail] = useState("");
-
   const navigate = useNavigate();
 
-  const goQuestions = () => {
-    if (email !== "") {
-      navigate("/questions");
-    } else {
-      alert("กรุณากรอกอีเมล์");
-    }
-  };
+  useEffect(() => {
+    WelcomeController.TextToSpeech(
+      "สวัสดีครับ ขออนุญาตแนะนำตัวนะครับ ผมชื่อ หวาง A001 ครับ"
+    );
+  }, []);
 
   useEffect(() => {
     if (transcript === "เริ่มสัมภาษณ์" && !listening) {
-      goQuestions();
+      WelcomeController.goQuestions(email, navigate);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [listening, transcript]);
