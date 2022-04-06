@@ -19,12 +19,14 @@ export default function Welcome() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    WelcomeController.TextToSpeech(
-      "สวัสดีครับ ขออนุญาตแนะนำตัวนะครับ ผมชื่อ หวาง A001 ครับ"
-    );
-    WelcomeController.TextToSpeech(
-      "ท่านผู้เข้าสอบ กดเปิดไมที่ด้านบนขวาของ จอ แล้วรบกวนพูดคำว่า เริ่มสัมภาษณ์ เพื่อเข้าสู่การสัมภาษณ์ครับ"
-    );
+    setTimeout(() => {
+      WelcomeController.TextToSpeech(
+        "สวัสดีครับ ขออนุญาตแนะนำตัวนะครับ ผมชื่อ หวาง A001 ครับ"
+      );
+      WelcomeController.TextToSpeech(
+        "ท่านผู้เข้าสอบ กดเปิดไมที่ด้านบนขวาของ จอ แล้วรบกวนพูดคำว่า เริ่มสัมภาษณ์ เพื่อเข้าสู่การสัมภาษณ์ครับ"
+      );
+    }, 5000);
   });
 
   useEffect(() => {
