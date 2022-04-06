@@ -32,7 +32,7 @@ export default function Questions({
     }
   };
   const processQuestion2 = (value: string) => {
-    if (value.includes("ไทย")) {
+    if (value.includes("ไทย") || value.includes("Thailand")) {
       setStatus(true);
     } else {
       setStatus(false);
