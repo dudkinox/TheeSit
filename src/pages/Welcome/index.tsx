@@ -10,12 +10,12 @@ import SpeechRecognition, {
 import MuteIcon from "../../assets/icons/mute-icon.svg";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import WelcomeController from "../../controllers/WelcomeController";
 
 export default function Welcome() {
   const { transcript, listening, browserSupportsSpeechRecognition } =
     useSpeechRecognition();
   const [email, setEmail] = useState("");
-
   const navigate = useNavigate();
 
   const goQuestions = () => {
@@ -25,6 +25,10 @@ export default function Welcome() {
       alert("กรุณากรอกอีเมล์");
     }
   };
+
+  useEffect(() => {
+    WelcomeController.TextToSpeech("สถานะครอบครัวผู้สัมภาษณ์เป็็นอย่างไรครับ");
+  }, []);
 
   useEffect(() => {
     if (transcript === "เริ่มสัมภาษณ์" && !listening) {
