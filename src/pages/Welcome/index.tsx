@@ -18,21 +18,15 @@ export default function Welcome() {
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
 
-  const goQuestions = () => {
-    if (email !== "") {
-      navigate("/questions");
-    } else {
-      alert("กรุณากรอกอีเมล์");
-    }
-  };
-
   useEffect(() => {
-    WelcomeController.TextToSpeech("สถานะครอบครัวผู้สัมภาษณ์เป็็นอย่างไรครับ");
+    WelcomeController.TextToSpeech(
+      "สวัสดีครับ ขออนุญาตแนะนำตัวนะครับ ผมชื่อ หวาง A001 ครับ"
+    );
   }, []);
 
   useEffect(() => {
     if (transcript === "เริ่มสัมภาษณ์" && !listening) {
-      goQuestions();
+      WelcomeController.goQuestions(email, navigate);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [listening, transcript]);
