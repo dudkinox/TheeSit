@@ -34,7 +34,7 @@ export default function Welcome() {
   }, [listening, transcript]);
 
   if (!browserSupportsSpeechRecognition) {
-    return <span>ไม่รองรับการโต้ตอบ AI ลองใช้ Google Chrome</span>;
+    return <span>browser ไม่รองรับการโต้ตอบ AI ลองใช้ Google Chrome</span>;
   }
 
   return (
