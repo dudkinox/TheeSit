@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Form } from "react-bootstrap";
 
 interface QuestionsProps {
@@ -9,6 +9,8 @@ interface QuestionsProps {
   setPoint: (value: React.SetStateAction<number>) => void;
   major: string;
   setMajor: (value: React.SetStateAction<string>) => void;
+  status: boolean;
+  setStatus: (value: React.SetStateAction<boolean>) => void;
 }
 
 export default function Questions({
@@ -19,14 +21,22 @@ export default function Questions({
   setPoint,
   major,
   setMajor,
+  status,
+  setStatus,
 }: QuestionsProps) {
-  const [status, setStatus] = useState(false);
-
   const processQuestion1 = (value: string) => {
-    if (value.includes("จันทรเกษม")) setStatus(true);
+    if (value.includes("จันทรเกษม")) {
+      setStatus(true);
+    } else {
+      setStatus(false);
+    }
   };
   const processQuestion2 = (value: string) => {
-    if (value.includes("ไทย")) setStatus(true);
+    if (value.includes("ไทย")) {
+      setStatus(true);
+    } else {
+      setStatus(false);
+    }
   };
   const processQuestion3 = (value: string) => {
     //   จับตัวเลข
@@ -38,7 +48,7 @@ export default function Questions({
   };
   const processQuestion5 = (value: string) => {
     //   จับตัวเลข
-    if (value !== "") setPoint(point + Number(value) / 360000);
+    if (value !== "") setPoint(point + Number(value) / 360);
   };
   const processQuestion6 = (value: string) => {
     //   จับตัวเลข

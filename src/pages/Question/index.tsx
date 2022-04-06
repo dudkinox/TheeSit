@@ -13,6 +13,7 @@ export default function QuestionPage() {
   const [numberQuestion, setNumberQuestion] = useState(0);
   const [point, setPoint] = useState(0);
   const [major, setMajor] = useState("");
+  const [status, setStatus] = useState(false);
 
   const questionsList = [
     {
@@ -88,6 +89,8 @@ export default function QuestionPage() {
           setPoint={setPoint}
           major={major}
           setMajor={setMajor}
+          status={status}
+          setStatus={setStatus}
         />
         <Row className="h-50">
           <Col xs={12} className="text-center">
