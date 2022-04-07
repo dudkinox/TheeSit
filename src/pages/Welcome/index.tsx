@@ -2,7 +2,9 @@ import { Col, Container, Row } from "react-bootstrap";
 import MicIcon from "../../assets/icons/mic-icon.svg";
 import SpaceIcon from "../../assets/icons/space-icon";
 import Icons from "../../components/Icons";
-import AI from "../../assets/png/นั่ง1.svg";
+import AInormal from "../../assets/png/นั่ง1.svg";
+import AIspeech from "../../assets/svg/พูด.svg";
+import AIhand from "../../assets/svg/ผายมือ.svg";
 import VoiceIcon from "../../assets/icons/voice-icon.svg";
 import SpeechRecognition, {
   useSpeechRecognition,
@@ -17,6 +19,7 @@ export default function Welcome() {
     useSpeechRecognition();
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
+  const [AI, setAI] = useState(AInormal);
 
   // WelcomeController.TextToSpeech(
   //   "สวัสดีครับ ขออนุญาตแนะนำตัวนะครับ ผมชื่อ หวาง A001 ครับ"
@@ -25,6 +28,18 @@ export default function Welcome() {
     WelcomeController.TextToSpeech(
       "ท่านผู้เข้าสอบ กดเปิดไมที่ด้านบนขวาของ จอ แล้วรบกวนพูดคำว่า เริ่มสัมภาษณ์ เพื่อเข้าสู่การสัมภาษณ์ครับ"
     );
+    for (let i = 0; i < 20; i++) {
+      setTimeout(() => {
+        if (i % 2 === 0) {
+          setAI(AInormal);
+        } else {
+          setAI(AIspeech);
+        }
+      }, 500 * i);
+    }
+    setTimeout(() => {
+      setAI(AIhand);
+    }, 500 * 19);
   };
 
   useEffect(() => {
