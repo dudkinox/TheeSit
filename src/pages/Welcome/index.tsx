@@ -18,16 +18,14 @@ export default function Welcome() {
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
 
-  useEffect(() => {
-    setTimeout(() => {
-      WelcomeController.TextToSpeech(
-        "สวัสดีครับ ขออนุญาตแนะนำตัวนะครับ ผมชื่อ หวาง A001 ครับ"
-      );
-      WelcomeController.TextToSpeech(
-        "ท่านผู้เข้าสอบ กดเปิดไมที่ด้านบนขวาของ จอ แล้วรบกวนพูดคำว่า เริ่มสัมภาษณ์ เพื่อเข้าสู่การสัมภาษณ์ครับ"
-      );
-    }, 5000);
-  });
+  // WelcomeController.TextToSpeech(
+  //   "สวัสดีครับ ขออนุญาตแนะนำตัวนะครับ ผมชื่อ หวาง A001 ครับ"
+  // );
+  const handleClick = () => {
+    WelcomeController.TextToSpeech(
+      "ท่านผู้เข้าสอบ กดเปิดไมที่ด้านบนขวาของ จอ แล้วรบกวนพูดคำว่า เริ่มสัมภาษณ์ เพื่อเข้าสู่การสัมภาษณ์ครับ"
+    );
+  };
 
   useEffect(() => {
     if (transcript === "เริ่มสัมภาษณ์" && !listening) {
@@ -118,7 +116,7 @@ export default function Welcome() {
             </Row>
           </Container>
         </Col>
-        <Col xs={6} className="text-center">
+        <Col xs={6} className="text-center" onClick={handleClick}>
           <Icons icon={AI} alt="AI" />
         </Col>
       </Row>
