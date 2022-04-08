@@ -9,6 +9,7 @@ import { useState } from "react";
 import Questions from "../../components/Questions";
 import "../../Themes/questions.css";
 import QuestionsList from "../../controllers/QuestionController";
+import WelcomeController from "../../controllers/WelcomeController";
 
 export default function QuestionPage() {
   const { transcript, listening, resetTranscript } = useSpeechRecognition();
@@ -17,6 +18,12 @@ export default function QuestionPage() {
   const [major, setMajor] = useState("");
   const [status, setStatus] = useState(false);
   const questionsList = QuestionsList(major);
+
+  const handleClick = () => {
+    WelcomeController.TextToSpeech(
+      "สวัสดีครับ อยากทราบว่า สถานะครอบครัวผู้สัมภาษณ์เป็นอย่างไรครับ"
+    );
+  };
 
   return (
     <div>
@@ -40,7 +47,10 @@ export default function QuestionPage() {
           )}
         </Col>
       </Row>
-      <Container>
+      <Container
+        style={{ position: "relative", top: 500 }}
+        onClick={handleClick}
+      >
         <Questions
           transcript={transcript}
           point={point}

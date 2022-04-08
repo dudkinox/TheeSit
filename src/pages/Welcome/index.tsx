@@ -13,6 +13,7 @@ import MuteIcon from "../../assets/icons/mute-icon.svg";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import WelcomeController from "../../controllers/WelcomeController";
+import { TypeButton } from "../../enum/ButtonEnum";
 
 export default function Welcome() {
   const { transcript, listening, browserSupportsSpeechRecognition } =
@@ -73,6 +74,7 @@ export default function Welcome() {
               className="my-3"
               icon={MuteIcon}
               alt="microphone"
+              type={TypeButton.BUTTON}
             />
           )}
         </Col>
