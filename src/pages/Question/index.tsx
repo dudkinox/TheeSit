@@ -7,6 +7,8 @@ import MuteIcon from "../../assets/icons/mute-icon.svg";
 import MicIcon from "../../assets/icons/mic-icon.svg";
 import { useState } from "react";
 import Questions from "../../components/Questions";
+import "../../Themes/questions.css";
+import QuestionsList from "../../controllers/QuestionController";
 
 export default function QuestionPage() {
   const { transcript, listening, resetTranscript } = useSpeechRecognition();
@@ -14,49 +16,7 @@ export default function QuestionPage() {
   const [point, setPoint] = useState(0);
   const [major, setMajor] = useState("");
   const [status, setStatus] = useState(false);
-
-  const questionsList = [
-    {
-      no: "1",
-      text: "สถานะครอบครัวผู้สัมภาษณ์เป็็นอย่างไรครับ",
-    },
-    {
-      no: "2",
-      text: "ผู้สัมภาษณ์มีสัญชาติประเทศอะไรครับ",
-    },
-    {
-      no: "3",
-      text: "ผลการเรียนเกรดเฉลี่ยเท่าไหร่ครับ",
-    },
-    {
-      no: "4",
-      text: "เคยสำเร็จการศึกษาจากที่มหาลัยใดมาก่อนหรือไม่ครับ",
-    },
-    {
-      no: "5",
-      text: "ครอบครัวมีรายได้ 1 ปี ทั้งหมดเท่าไหร่ครับ",
-    },
-    {
-      no: "6",
-      text: "ผู้สัมภาษณ์ทำงานพิเศษอะไรครับ",
-    },
-    {
-      no: "7",
-      text: "ผู้สัมภาษณ์เรียนอยู่สาขาอะไรครับ",
-    },
-    {
-      no: "8",
-      text: `ทำไมถึงเลือกมาเรียนสาขา ${major} ครับ`,
-    },
-    {
-      no: "9",
-      text: "ท่านเคยทำประโยชน์ต่อสังคม / สาธารณะ อะไรบ้าง รวมทั้งสิ้น กี่ ชั่วโมงครับ",
-    },
-    {
-      no: "10",
-      text: "ผู้สัมภาษณ์มีจำนวนกี่คนในครอบครัว",
-    },
-  ];
+  const questionsList = QuestionsList(major);
 
   return (
     <div>
