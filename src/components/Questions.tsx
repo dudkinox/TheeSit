@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Form } from "react-bootstrap";
+import AI from "../assets/svg/นั่ง1.svg";
 
 interface QuestionsProps {
   transcript: string;
@@ -114,7 +115,14 @@ export default function Questions({
 
   return (
     <>
-      <h1>คำถามตัวอย่างข้อ {no}</h1>
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `\nbody{\nbackground-image: url('${AI}');height: 100%;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;\n}\n`,
+        }}
+      />
       <h2>{questions}</h2>
       <Form>
         <Form.Group className="mb-3">
