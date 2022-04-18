@@ -5,7 +5,6 @@ import AI from "../assets/svg/นั่ง1.svg";
 interface QuestionsProps {
   transcript: string;
   point: number;
-  questions: string;
   no: string;
   setPoint: (value: React.SetStateAction<number>) => void;
   major: string;
@@ -17,7 +16,6 @@ interface QuestionsProps {
 export default function Questions({
   transcript,
   point,
-  questions,
   no,
   setPoint,
   major,
@@ -123,7 +121,6 @@ export default function Questions({
           background-size: cover;\n}\n`,
         }}
       />
-      <h2>{questions}</h2>
       <Form>
         <Form.Group className="mb-3">
           <Form.Control

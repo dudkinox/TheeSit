@@ -20,9 +20,7 @@ export default function QuestionPage() {
   const questionsList = QuestionsList(major);
 
   const handleClick = () => {
-    WelcomeController.TextToSpeech(
-      "สวัสดีครับ อยากทราบว่า สถานะครอบครัวผู้สัมภาษณ์เป็นอย่างไรครับ"
-    );
+    WelcomeController.TextToSpeech(`${questionsList[numberQuestion].text}`);
   };
 
   return (
@@ -47,21 +45,19 @@ export default function QuestionPage() {
           )}
         </Col>
       </Row>
-      <Container
-        style={{ position: "relative", top: 500 }}
-        onClick={handleClick}
-      >
-        <Questions
-          transcript={transcript}
-          point={point}
-          questions={questionsList[numberQuestion].text}
-          no={questionsList[numberQuestion].no}
-          setPoint={setPoint}
-          major={major}
-          setMajor={setMajor}
-          status={status}
-          setStatus={setStatus}
-        />
+      <Container style={{ position: "relative", top: 500 }}>
+        <span onClick={handleClick}>
+          <Questions
+            transcript={transcript}
+            point={point}
+            no={questionsList[numberQuestion].no}
+            setPoint={setPoint}
+            major={major}
+            setMajor={setMajor}
+            status={status}
+            setStatus={setStatus}
+          />
+        </span>
         <Row className="h-50">
           <Col xs={12} className="text-center">
             <Button
