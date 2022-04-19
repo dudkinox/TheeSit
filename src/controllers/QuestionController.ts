@@ -24,7 +24,7 @@ export default function QuestionsList(major: string): questionModel[] {
     },
     {
       no: "6",
-      text: "ผู้สัมภาษณ์ทำงานพิเศษอะไรครับ",
+      text: "ผู้สัมภาษณ์ได้ทำงานพิเศษ หรือไม่ ถ้าใช่อธิบายเกี่ยวกับงานของผู้สัมภาษณ์ครับ",
     },
     {
       no: "7",

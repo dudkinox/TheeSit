@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Form } from "react-bootstrap";
 import AI from "../assets/svg/นั่ง1.svg";
+import DetectClassificationService from "../services/detectClassification.service";
 import DetectNumberService from "../services/detectNumber.service";
 
 interface QuestionsProps {
@@ -70,13 +71,11 @@ export default function Questions({
     }
   };
   const processQuestion6 = (value: string) => {
-    //   จับตัวเลข
+    // ตรวจจับการทำงาน
     if (value !== "") {
-      if (Number(value) <= 30) {
-        setStatus(true);
-      } else {
-        setStatus(false);
-      }
+      DetectClassificationService.getDetectClassification(value).then((res) => {
+        console.log(res);
+      });
     }
   };
   const processQuestion7 = (value: string) => {
