@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Form } from "react-bootstrap";
 import AI from "../assets/svg/นั่ง1.svg";
+import DetectNumberService from "../services/detectNumber.service";
 
 interface QuestionsProps {
   transcript: string;
@@ -20,7 +21,6 @@ export default function Questions({
   setPoint,
   major,
   setMajor,
-  status,
   setStatus,
 }: QuestionsProps) {
   const processQuestion1 = (value: string) => {
@@ -38,16 +38,36 @@ export default function Questions({
     }
   };
   const processQuestion3 = (value: string) => {
-    //   จับตัวเลข
-    if (value !== "") setPoint(point + Number(value));
+    if (value !== "") {
+      DetectNumberService.getDetectNumber(value).then((res) => {
+        for (var i = 0; i < res.types.length; i++) {
+          if (res.types[i] === 2) {
+            for (var j = 0; j <= i; j++) {
+              setPoint(Number(res.tokens[j]) + point);
+            }
+          }
+        }
+      });
+    }
   };
   const processQuestion4 = (value: string) => {
-    //   จับหมวดหมู่ปฏิเสธ
-    if (value !== "") setStatus(true);
+    if (value.includes("ไม่เคย") || value.includes("ไม่")) {
+      setPoint(point + 1);
+    }
   };
   const processQuestion5 = (value: string) => {
-    //   จับตัวเลข
-    if (value !== "") setPoint(point + Number(value) / 360);
+    if (value !== "") {
+      const formatComma = value.replace(/,/g, "");
+      DetectNumberService.getDetectNumber(formatComma).then((res) => {
+        for (var i = 0; i < res.types.length; i++) {
+          if (res.types[i] === 2) {
+            for (var j = 0; j <= i; j++) {
+              setPoint(point + Number(res.tokens[j]) / 360000);
+            }
+          }
+        }
+      });
+    }
   };
   const processQuestion6 = (value: string) => {
     //   จับตัวเลข
@@ -132,8 +152,6 @@ export default function Questions({
         </Form.Group>
       </Form>
       {point > 0 ? `คะแนน = ${point}` : <></>}
-      <br />
-      {status ? "ยังรอดอยู่" : "ไม่ผ่านเกณฑ์แล้ว"}
       <br />
       {major !== "" ? `สาขาที่เรียน: ${major}` : <></>}
     </>
