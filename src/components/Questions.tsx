@@ -24,17 +24,17 @@ export default function Questions({
   setStatus,
 }: QuestionsProps) {
   const processQuestion1 = (value: string) => {
-    if (value.includes("จันทรเกษม")) {
-      setStatus(true);
-    } else {
-      setStatus(false);
+    if (
+      value.includes("อย่าร้าง") ||
+      value.includes("เลิก") ||
+      value.includes("อย่า")
+    ) {
+      setPoint(1);
     }
   };
   const processQuestion2 = (value: string) => {
     if (value.includes("ไทย") || value.includes("Thailand")) {
-      setStatus(true);
-    } else {
-      setStatus(false);
+      setPoint(point + 1);
     }
   };
   const processQuestion3 = (value: string) => {

@@ -13,10 +13,10 @@ import WelcomeController from "../../controllers/WelcomeController";
 
 export default function QuestionPage() {
   const { transcript, listening, resetTranscript } = useSpeechRecognition();
-  const [numberQuestion, setNumberQuestion] = useState(0);
-  const [point, setPoint] = useState(0);
-  const [major, setMajor] = useState("");
-  const [status, setStatus] = useState(false);
+  const [numberQuestion, setNumberQuestion] = useState<number>(0);
+  const [point, setPoint] = useState<number>(0);
+  const [major, setMajor] = useState<string>("");
+  const [status, setStatus] = useState<boolean>(false);
   const questionsList = QuestionsList(major);
 
   const handleClick = () => {
