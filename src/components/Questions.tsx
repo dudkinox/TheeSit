@@ -71,18 +71,24 @@ export default function Questions({
     }
   };
   const processQuestion6 = (value: string) => {
-    // ตรวจจับการทำงาน
     if (value !== "") {
-      DetectClassificationService.getDetectClassification(value).then((res) => {
-        console.log(res);
-      });
+      DetectClassificationService.getDetectClassification(value, "5").then(
+        (res) => {
+          for (var i = 0; i < res.tags.length; i++) {
+            if (res.tags[i].tag.includes("งาน")) {
+              setPoint(point + 1);
+              console.log(res.tags[i].tag);
+              break;
+            }
+          }
+        }
+      );
     }
   };
   const processQuestion7 = (value: string) => {
     if (value !== "") setMajor(value);
   };
   const processQuestion8 = (value: string) => {
-    //   จับหมวดหมู่สาขา
     if (value !== "") setPoint(point);
   };
   const processQuestion9 = (value: string) => {
