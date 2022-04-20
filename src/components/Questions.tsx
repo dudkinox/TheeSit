@@ -36,7 +36,7 @@ export default function Questions({
     }
   };
   const processQuestion3 = (value: string) => {
-    if (value !== "" && !listening) {
+    if (value !== "") {
       DetectNumberService.getDetectNumber(value).then((res) => {
         for (var i = 0; i < res.types.length; i++) {
           if (res.types[i] === 2) {
@@ -131,7 +131,7 @@ export default function Questions({
         break;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [transcript, no]);
+  }, [transcript, no, listening]);
 
   return (
     <>

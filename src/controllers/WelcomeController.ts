@@ -8,7 +8,6 @@ const WelcomeController = {
     utterThis.pitch = 0;
     utterThis.text = text;
     synth.speak(utterThis);
-    console.log("พูด");
   },
   goQuestions(email: string, navigate: NavigateFunction) {
     if (email !== "") {
