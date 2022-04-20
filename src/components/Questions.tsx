@@ -11,6 +11,7 @@ interface QuestionsProps {
   setPoint: (value: React.SetStateAction<number>) => void;
   major: string;
   setMajor: (value: React.SetStateAction<string>) => void;
+  transcript: string;
 }
 
 export default function Questions({
@@ -19,8 +20,9 @@ export default function Questions({
   setPoint,
   major,
   setMajor,
+  transcript,
 }: QuestionsProps) {
-  const { listening, transcript } = useSpeechRecognition();
+  const { listening } = useSpeechRecognition();
   const processQuestion1 = (value: string) => {
     if (
       value.includes("อย่าร้าง") ||
@@ -149,6 +151,7 @@ export default function Questions({
             <Form.Control
               value={transcript}
               as="textarea"
+              readOnly
               placeholder="Leave a comment here"
               style={{ height: "100px" }}
             />

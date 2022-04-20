@@ -12,7 +12,7 @@ import QuestionsList from "../../controllers/QuestionController";
 import WelcomeController from "../../controllers/WelcomeController";
 
 export default function QuestionPage() {
-  const { listening, resetTranscript } = useSpeechRecognition();
+  const { transcript, listening, resetTranscript } = useSpeechRecognition();
   const [numberQuestion, setNumberQuestion] = useState<number>(0);
   const [point, setPoint] = useState<number>(0);
   const [major, setMajor] = useState<string>("");
@@ -52,6 +52,7 @@ export default function QuestionPage() {
             setPoint={setPoint}
             major={major}
             setMajor={setMajor}
+            transcript={transcript}
           />
         </span>
         <Row className="h-50">
