@@ -10,6 +10,7 @@ import Questions from "../../components/Questions";
 import "../../Themes/questions.css";
 import QuestionsList from "../../controllers/QuestionController";
 import WelcomeController from "../../controllers/WelcomeController";
+import EmailService from "../../services/email.service";
 
 export default function QuestionPage() {
   const { transcript, listening, resetTranscript } = useSpeechRecognition();
@@ -23,7 +24,11 @@ export default function QuestionPage() {
   };
 
   const sendEmail = () => {
-    console.log("send email");
+    if (point >= 45) {
+    }
+    EmailService.sendEmail("", point).then((res) => {
+      console.log(res);
+    });
   };
 
   return (
