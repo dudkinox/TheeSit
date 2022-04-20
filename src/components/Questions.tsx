@@ -1,29 +1,26 @@
 import { useEffect } from "react";
-import { Form } from "react-bootstrap";
+import { FloatingLabel, Form } from "react-bootstrap";
+import { useSpeechRecognition } from "react-speech-recognition";
 import AI from "../assets/svg/นั่ง1.svg";
 import DetectClassificationService from "../services/detectClassification.service";
 import DetectNumberService from "../services/detectNumber.service";
 
 interface QuestionsProps {
-  transcript: string;
   point: number;
   no: string;
   setPoint: (value: React.SetStateAction<number>) => void;
   major: string;
   setMajor: (value: React.SetStateAction<string>) => void;
-  status: boolean;
-  setStatus: (value: React.SetStateAction<boolean>) => void;
 }
 
 export default function Questions({
-  transcript,
   point,
   no,
   setPoint,
   major,
   setMajor,
-  setStatus,
 }: QuestionsProps) {
+  const { listening, transcript } = useSpeechRecognition();
   const processQuestion1 = (value: string) => {
     if (
       value.includes("อย่าร้าง") ||
@@ -39,7 +36,7 @@ export default function Questions({
     }
   };
   const processQuestion3 = (value: string) => {
-    if (value !== "") {
+    if (value !== "" && !listening) {
       DetectNumberService.getDetectNumber(value).then((res) => {
         for (var i = 0; i < res.types.length; i++) {
           if (res.types[i] === 2) {
@@ -103,34 +100,34 @@ export default function Questions({
   useEffect(() => {
     switch (no) {
       case "1":
-        processQuestion1(transcript);
+        if (!listening) processQuestion1(transcript);
         break;
       case "2":
-        processQuestion2(transcript);
+        if (!listening) processQuestion2(transcript);
         break;
       case "3":
-        processQuestion3(transcript);
+        if (!listening) processQuestion3(transcript);
         break;
       case "4":
-        processQuestion4(transcript);
+        if (!listening) processQuestion4(transcript);
         break;
       case "5":
-        processQuestion5(transcript);
+        if (!listening) processQuestion5(transcript);
         break;
       case "6":
-        processQuestion6(transcript);
+        if (!listening) processQuestion6(transcript);
         break;
       case "7":
-        processQuestion7(transcript);
+        if (!listening) processQuestion7(transcript);
         break;
       case "8":
-        processQuestion8(transcript);
+        if (!listening) processQuestion8(transcript);
         break;
       case "9":
-        processQuestion9(transcript);
+        if (!listening) processQuestion9(transcript);
         break;
       case "10":
-        processQuestion10(transcript);
+        if (!listening) processQuestion10(transcript);
         break;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -147,18 +144,29 @@ export default function Questions({
         }}
       />
       <Form>
-        <Form.Group className="mb-3">
-          <Form.Control
-            type="text"
-            value={transcript}
-            readOnly
-            placeholder="คำตอบ"
-          />
+        <Form.Group className="mb-3 opacity-75">
+          <FloatingLabel controlId="floatingTextarea2" label="">
+            <Form.Control
+              value={transcript}
+              as="textarea"
+              placeholder="Leave a comment here"
+              style={{ height: "100px" }}
+            />
+          </FloatingLabel>
         </Form.Group>
       </Form>
-      {point > 0 ? `คะแนน = ${point}` : <></>}
-      <br />
-      {major !== "" ? `สาขาที่เรียน: ${major}` : <></>}
+      {point > 0 ? (
+        <p className="bg-danger text-white w-25">คะแนน = {point}</p>
+      ) : (
+        <></>
+      )}
+      {major !== "" ? (
+        <p className="bg-danger text-white w-25 position-absolute">
+          สาขาที่เรียน: {major}
+        </p>
+      ) : (
+        <></>
+      )}
     </>
   );
 }

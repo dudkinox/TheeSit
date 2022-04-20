@@ -12,11 +12,10 @@ import QuestionsList from "../../controllers/QuestionController";
 import WelcomeController from "../../controllers/WelcomeController";
 
 export default function QuestionPage() {
-  const { transcript, listening, resetTranscript } = useSpeechRecognition();
+  const { listening, resetTranscript } = useSpeechRecognition();
   const [numberQuestion, setNumberQuestion] = useState<number>(0);
   const [point, setPoint] = useState<number>(0);
   const [major, setMajor] = useState<string>("");
-  const [status, setStatus] = useState<boolean>(false);
   const questionsList = QuestionsList(major);
 
   const handleClick = () => {
@@ -48,14 +47,11 @@ export default function QuestionPage() {
       <Container style={{ position: "relative", top: 500 }}>
         <span onClick={handleClick}>
           <Questions
-            transcript={transcript}
             point={point}
             no={questionsList[numberQuestion].no}
             setPoint={setPoint}
             major={major}
             setMajor={setMajor}
-            status={status}
-            setStatus={setStatus}
           />
         </span>
         <Row className="h-50">
