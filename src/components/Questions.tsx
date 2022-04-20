@@ -91,12 +91,32 @@ export default function Questions({
     if (value !== "") setPoint(point);
   };
   const processQuestion9 = (value: string) => {
-    //   จับหมวดหมู่สาขา และจับตัวเลขจำนวนชั่วโมง
-    if (value !== "") setPoint(point);
+    if (value !== "") {
+      const formatComma = value.replace(/,/g, "");
+      DetectNumberService.getDetectNumber(formatComma).then((res) => {
+        for (var i = 0; i < res.types.length; i++) {
+          if (res.types[i] === 2) {
+            for (var j = 0; j <= i; j++) {
+              setPoint(point + Number(res.tokens[j]));
+            }
+          }
+        }
+      });
+    }
   };
   const processQuestion10 = (value: string) => {
-    //   จับตัวเลข
-    if (value !== "") setPoint(point + Number(value));
+    if (value !== "") {
+      const formatComma = value.replace(/,/g, "");
+      DetectNumberService.getDetectNumber(formatComma).then((res) => {
+        for (var i = 0; i < res.types.length; i++) {
+          if (res.types[i] === 2) {
+            for (var j = 0; j <= i; j++) {
+              setPoint(point + Number(res.tokens[j]));
+            }
+          }
+        }
+      });
+    }
   };
 
   useEffect(() => {

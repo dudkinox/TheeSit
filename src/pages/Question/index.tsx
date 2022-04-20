@@ -22,6 +22,10 @@ export default function QuestionPage() {
     WelcomeController.TextToSpeech(`${questionsList[numberQuestion].text}`);
   };
 
+  const sendEmail = () => {
+    console.log("send email");
+  };
+
   return (
     <div>
       <Row>
@@ -58,13 +62,18 @@ export default function QuestionPage() {
         <Row className="h-50">
           <Col xs={12} className="text-center">
             <Button
+              variant={numberQuestion === 9 ? "success" : "primary"}
               className="col-4"
               onClick={() => {
-                setNumberQuestion(numberQuestion + 1);
+                if (numberQuestion === 9) {
+                  sendEmail();
+                } else {
+                  setNumberQuestion(numberQuestion + 1);
+                }
                 resetTranscript();
               }}
             >
-              ถัดไป
+              {numberQuestion === 9 ? "เสร็จสิ้น" : "ถัดไป"}
             </Button>
           </Col>
         </Row>
