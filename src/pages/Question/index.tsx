@@ -11,7 +11,7 @@ import "../../Themes/questions.css";
 import QuestionsList from "../../controllers/QuestionController";
 import WelcomeController from "../../controllers/WelcomeController";
 import EmailService from "../../services/email.service";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function QuestionPage() {
   const { transcript, listening, resetTranscript } = useSpeechRecognition();
@@ -20,6 +20,7 @@ export default function QuestionPage() {
   const [major, setMajor] = useState<string>("");
   const { state } = useLocation();
   const questionsList = QuestionsList(major);
+  const navigator = useNavigate();
 
   const handleClick = () => {
     WelcomeController.TextToSpeech(`${questionsList[numberQuestion].text}`);
@@ -34,7 +35,7 @@ export default function QuestionPage() {
       sum = "ไม่ผ่านเกณฑ์ประเมิน";
     }
     EmailService.sendEmail(major, email.email, sum).then((res) => {
-      console.log(res);
+      navigator("/finish");
     });
   };
 
