@@ -11,12 +11,14 @@ import "../../Themes/questions.css";
 import QuestionsList from "../../controllers/QuestionController";
 import WelcomeController from "../../controllers/WelcomeController";
 import EmailService from "../../services/email.service";
+import { useLocation } from "react-router-dom";
 
 export default function QuestionPage() {
   const { transcript, listening, resetTranscript } = useSpeechRecognition();
   const [numberQuestion, setNumberQuestion] = useState<number>(0);
   const [point, setPoint] = useState<number>(0);
   const [major, setMajor] = useState<string>("");
+  const { state } = useLocation();
   const questionsList = QuestionsList(major);
 
   const handleClick = () => {
@@ -24,9 +26,14 @@ export default function QuestionPage() {
   };
 
   const sendEmail = () => {
+    const email = state as { email: string };
+    let sum = "";
     if (point >= 45) {
+      sum = "ผ่านเกณฑ์ประเมิน";
+    } else {
+      sum = "ไม่ผ่านเกณฑ์ประเมิน";
     }
-    EmailService.sendEmail("", point).then((res) => {
+    EmailService.sendEmail(major, email.email, sum).then((res) => {
       console.log(res);
     });
   };

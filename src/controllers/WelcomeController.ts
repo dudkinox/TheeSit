@@ -11,7 +11,11 @@ const WelcomeController = {
   },
   goQuestions(email: string, navigate: NavigateFunction) {
     if (email !== "") {
-      navigate("/questions");
+      navigate("/questions", {
+        state: {
+          email: email,
+        },
+      });
     } else {
       WelcomeController.TextToSpeech("กรุณา กรอก Email ก่อนเริ่มสัมภาษณ์ครับ");
     }

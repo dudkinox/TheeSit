@@ -1,9 +1,9 @@
 import axiosInstance from "../http/backend";
 
 const EmailService = {
-  sendEmail: (major: string, email: string, point: string) => {
+  sendEmail: (major: string, email: any, point: string) => {
     return axiosInstance
-      .post<any>(`/send-email`, {
+      .post<any>(`/api/send-email`, {
         major: major,
         email: email,
         point: point,
