@@ -8,7 +8,7 @@ const router = express.Router();
 router.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
 // login
-router.get("/send-email", sendEmail);
+router.post("/send-email", sendEmail);
 
 module.exports = {
   routes: router,
