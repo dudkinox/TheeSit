@@ -20,10 +20,16 @@ export default function QuestionPage() {
   const [major, setMajor] = useState<string>("");
   const { state } = useLocation();
   const questionsList = QuestionsList(major);
+  const [animationsAI, setAnimationAI] = useState<string>("AnimationDefault");
   const navigator = useNavigate();
 
   const handleClick = () => {
-    WelcomeController.TextToSpeech(`${questionsList[numberQuestion].text}`);
+    setAnimationAI("AnimationAI");
+    WelcomeController.TextToSpeech(
+      `${questionsList[numberQuestion].text}`,
+      setAnimationAI,
+      3000
+    );
   };
 
   const sendEmail = () => {
@@ -40,7 +46,7 @@ export default function QuestionPage() {
   };
 
   return (
-    <div>
+    <div id={animationsAI}>
       <Row>
         <Col xs={11}></Col>
         <Col xs={1}>

@@ -23,10 +23,13 @@ export default function Welcome() {
   const [nameStudent, setNameStudent] = useState("");
   const navigate = useNavigate();
   const [AI, setAI] = useState(AInormal);
+  const [AnimationAI, setAnimationAI] = useState("AnimationDefaultWelcome");
 
   const handleClick = () => {
     WelcomeController.TextToSpeech(
-      "ท่านผู้เข้าสอบ กดเปิดไมที่ด้านบนขวาของ จอ แล้วรบกวนพูดคำว่า เริ่มสัมภาษณ์ เพื่อเข้าสู่การสัมภาษณ์ครับ"
+      "ท่านผู้เข้าสอบ กดเปิดไมที่ด้านบนขวาของ จอ แล้วรบกวนพูดคำว่า เริ่มสัมภาษณ์ เพื่อเข้าสู่การสัมภาษณ์ครับ",
+      setAnimationAI,
+      5000
     );
     for (let i = 0; i < 20; i++) {
       setTimeout(() => {
@@ -44,7 +47,14 @@ export default function Welcome() {
 
   useEffect(() => {
     if (transcript === "เริ่มสัมภาษณ์" && !listening) {
-      WelcomeController.goQuestions(email, idStudent, nameStudent, navigate);
+      WelcomeController.goQuestions(
+        email,
+        idStudent,
+        nameStudent,
+        navigate,
+        setAnimationAI,
+        1000
+      );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [listening, transcript]);
@@ -62,7 +72,7 @@ export default function Welcome() {
   };
 
   return (
-    <>
+    <div id={AnimationAI}>
       <Row>
         <Col xs={11}>
           <SpaceIcon />
@@ -162,6 +172,6 @@ export default function Welcome() {
           <Icons icon={AI} alt="AI" />
         </Col>
       </Row>
-    </>
+    </div>
   );
 }

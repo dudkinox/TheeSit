@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { FloatingLabel, Form } from "react-bootstrap";
 import { useSpeechRecognition } from "react-speech-recognition";
-import AI from "../assets/svg/นั่ง1.svg";
 import DetectClassificationService from "../services/detectClassification.service";
 import DetectNumberService from "../services/detectNumber.service";
 
@@ -157,14 +156,6 @@ export default function Questions({
 
   return (
     <>
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `\nbody{\nbackground-image: url('${AI}');height: 100%;
-          background-position: center;
-          background-repeat: no-repeat;
-          background-size: cover;\n}\n`,
-        }}
-      />
       <Form>
         <Form.Group className="mb-3 opacity-75">
           <FloatingLabel controlId="floatingTextarea2" label="">

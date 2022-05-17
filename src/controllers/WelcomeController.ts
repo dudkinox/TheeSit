@@ -1,19 +1,28 @@
 import { NavigateFunction } from "react-router-dom";
 
 const WelcomeController = {
-  TextToSpeech(text: string) {
+  TextToSpeech(
+    text: string,
+    setAnimationAI: React.Dispatch<React.SetStateAction<string>>,
+    delay: number
+  ) {
     const synth = window.speechSynthesis;
     const utterThis = new SpeechSynthesisUtterance();
     utterThis.lang = "th-TH";
     utterThis.pitch = 0;
     utterThis.text = text;
     synth.speak(utterThis);
+    setTimeout(() => {
+      setAnimationAI("AnimationDefault");
+    }, delay);
   },
   goQuestions(
     email: string,
     idStudent: string,
     nameStudent: string,
-    navigate: NavigateFunction
+    navigate: NavigateFunction,
+    setAnimationAI: React.Dispatch<React.SetStateAction<string>>,
+    delay: number
   ) {
     if (email !== "" && idStudent !== "" && nameStudent !== "") {
       navigate("/questions", {
@@ -23,7 +32,9 @@ const WelcomeController = {
       });
     } else {
       WelcomeController.TextToSpeech(
-        "กรุณา กรอกข้อมูลให้ครบถ้วน ก่อนเริ่มสัมภาษณ์ครับ"
+        "กรุณา กรอกข้อมูลให้ครบถ้วน ก่อนเริ่มสัมภาษณ์ครับ",
+        setAnimationAI,
+        delay
       );
     }
   },

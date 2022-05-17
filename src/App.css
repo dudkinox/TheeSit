@@ -15,3 +15,45 @@ body {
 * {
   font-family: "PSL KandaExtra Pro", sans-serif;
 }
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#AnimationAI {
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  animation: animationAI 3s ease 0s infinite normal none;
+}
+
+#AnimationDefault {
+  background-image: url("assets/svg/นั่ง1.svg");
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@keyframes animationAI {
+  0.0% {
+    background-image: url("assets/svg/นั่ง1.svg");
+  }
+  20.0% {
+    background-image: url("assets/svg/นั่ง+2.svg");
+  }
+  40.0% {
+    background-image: url("assets/svg/นั่ง1.svg");
+  }
+  60.0% {
+    background-image: url("assets/svg/Movement+พยักหน้า.svg");
+  }
+  80.0% {
+    background-image: url("assets/svg/นั่ง1.svg");
+  }
+  100.0% {
+    background-image: url("assets/svg/นั่ง+2.svg");
+  }
+}
