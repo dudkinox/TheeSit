@@ -19,6 +19,8 @@ export default function Welcome() {
   const { transcript, listening, browserSupportsSpeechRecognition } =
     useSpeechRecognition();
   const [email, setEmail] = useState("");
+  const [idStudent, setIdStudent] = useState("");
+  const [nameStudent, setNameStudent] = useState("");
   const navigate = useNavigate();
   const [AI, setAI] = useState(AInormal);
 
@@ -42,7 +44,7 @@ export default function Welcome() {
 
   useEffect(() => {
     if (transcript === "เริ่มสัมภาษณ์" && !listening) {
-      WelcomeController.goQuestions(email, navigate);
+      WelcomeController.goQuestions(email, idStudent, nameStudent, navigate);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [listening, transcript]);
@@ -50,6 +52,14 @@ export default function Welcome() {
   if (!browserSupportsSpeechRecognition) {
     return <span>browser ไม่รองรับการโต้ตอบ AI ลองใช้ Google Chrome</span>;
   }
+
+  const inputStyle = {
+    background: "#F0F0F0",
+    boxShadow: "0px 4px 23px rgba(0, 0, 0, 0.41)",
+    borderRadius: "52.5px",
+    margin: "20px",
+    height: "40px",
+  };
 
   return (
     <>
@@ -99,15 +109,33 @@ export default function Welcome() {
             >
               กรุณากรอกข้อมูลให้ครบถ้วน
             </p>
+            <Row>
+              <Col>
+                <input
+                  type="text"
+                  placeholder="รหัสนักศึกษา"
+                  style={inputStyle}
+                  className="form-control"
+                  onChange={(e) => setIdStudent(e.target.value)}
+                  value={idStudent}
+                />
+              </Col>
+              <Col>
+                <input
+                  type="text"
+                  placeholder="ชื่อ - สกุล"
+                  className="form-control"
+                  style={inputStyle}
+                  onChange={(e) => setNameStudent(e.target.value)}
+                  value={nameStudent}
+                />
+              </Col>
+            </Row>
             <input
               type="text"
               className="form-control"
               placeholder="E-mail"
-              style={{
-                background: "#F0F0F0",
-                boxShadow: "0px 4px 23px rgba(0, 0, 0, 0.41)",
-                borderRadius: "52.5px",
-              }}
+              style={inputStyle}
               onChange={(e) => setEmail(e.target.value)}
               value={email}
             />

@@ -9,15 +9,22 @@ const WelcomeController = {
     utterThis.text = text;
     synth.speak(utterThis);
   },
-  goQuestions(email: string, navigate: NavigateFunction) {
-    if (email !== "") {
+  goQuestions(
+    email: string,
+    idStudent: string,
+    nameStudent: string,
+    navigate: NavigateFunction
+  ) {
+    if (email !== "" && idStudent !== "" && nameStudent !== "") {
       navigate("/questions", {
         state: {
           email: email,
         },
       });
     } else {
-      WelcomeController.TextToSpeech("กรุณา กรอก Email ก่อนเริ่มสัมภาษณ์ครับ");
+      WelcomeController.TextToSpeech(
+        "กรุณา กรอกข้อมูลให้ครบถ้วน ก่อนเริ่มสัมภาษณ์ครับ"
+      );
     }
   },
 };
