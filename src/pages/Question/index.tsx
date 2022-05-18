@@ -25,10 +25,46 @@ export default function QuestionPage() {
 
   const handleClick = () => {
     setAnimationAI("AnimationAI");
+    var timer = 0;
+    console.log(numberQuestion);
+
+    switch (numberQuestion) {
+      case 0:
+        timer = 3000;
+        break;
+      case 1:
+        timer = 3000;
+        break;
+      case 2:
+        timer = 3000;
+        break;
+      case 3:
+        timer = 6000;
+        break;
+      case 4:
+        timer = 4300;
+        break;
+      case 5:
+        timer = 6000;
+        break;
+      case 6:
+        timer = 3000;
+        break;
+      case 7:
+        timer = 3000;
+        break;
+      case 8:
+        timer = 6500;
+        break;
+      default:
+        timer = 4000;
+        break;
+    }
     WelcomeController.TextToSpeech(
       `${questionsList[numberQuestion].text}`,
       setAnimationAI,
-      3000
+      timer,
+      "AnimationDefault"
     );
   };
 
@@ -68,7 +104,11 @@ export default function QuestionPage() {
         </Col>
       </Row>
       <Container style={{ position: "relative", top: 500 }}>
-        <span onClick={handleClick}>
+        <span
+          onClick={handleClick}
+          data-aos="fade-down"
+          data-aos-duration="1000"
+        >
           <Questions
             point={point}
             no={questionsList[numberQuestion].no}
@@ -81,6 +121,9 @@ export default function QuestionPage() {
         <Row className="h-50">
           <Col xs={12} className="text-center">
             <Button
+              data-aos={numberQuestion === 0 ? "fade-up" : ""}
+              data-aos-duration={numberQuestion === 0 ? "1000" : ""}
+              data-aos-delay={numberQuestion === 0 ? "500" : ""}
               variant={numberQuestion === 9 ? "success" : "primary"}
               className="col-4"
               onClick={() => {

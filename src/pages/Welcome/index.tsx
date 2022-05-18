@@ -3,6 +3,7 @@ import MicIcon from "../../assets/icons/mic-icon.svg";
 import SpaceIcon from "../../assets/icons/space-icon";
 import Icons from "../../components/Icons";
 import AInormal from "../../assets/png/นั่ง1.svg";
+import AIwelcome from "../../assets/png/นั่ง3.svg";
 import AIspeech from "../../assets/svg/พูด.svg";
 import AIhand from "../../assets/svg/ผายมือ.svg";
 import VoiceIcon from "../../assets/icons/voice-icon.svg";
@@ -23,13 +24,16 @@ export default function Welcome() {
   const [nameStudent, setNameStudent] = useState("");
   const navigate = useNavigate();
   const [AI, setAI] = useState(AInormal);
+  const [speak, setSpeak] = useState(false);
   const [AnimationAI, setAnimationAI] = useState("AnimationDefaultWelcome");
 
   const handleClick = () => {
+    setSpeak(true);
     WelcomeController.TextToSpeech(
       "ท่านผู้เข้าสอบ กดเปิดไมที่ด้านบนขวาของ จอ แล้วรบกวนพูดคำว่า เริ่มสัมภาษณ์ เพื่อเข้าสู่การสัมภาษณ์ครับ",
       setAnimationAI,
-      5000
+      5000,
+      "AnimationDefaultWelcome"
     );
     for (let i = 0; i < 20; i++) {
       setTimeout(() => {
@@ -43,6 +47,7 @@ export default function Welcome() {
     setTimeout(() => {
       setAI(AIhand);
     }, 500 * 19);
+    setSpeak(false);
   };
 
   useEffect(() => {
@@ -59,6 +64,23 @@ export default function Welcome() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [listening, transcript]);
 
+  useEffect(() => {
+    if (!speak) {
+      for (let i = 0; i < 20; i++) {
+        setTimeout(() => {
+          if (i % 2 === 0) {
+            setAI(AInormal);
+          } else {
+            setAI(AIwelcome);
+          }
+        }, 2000 * i);
+      }
+      setTimeout(() => {
+        setAI(AIwelcome);
+      }, 2000 * 19);
+    }
+  }, [speak]);
+
   if (!browserSupportsSpeechRecognition) {
     return <span>browser ไม่รองรับการโต้ตอบ AI ลองใช้ Google Chrome</span>;
   }
@@ -72,7 +94,7 @@ export default function Welcome() {
   };
 
   return (
-    <div id={AnimationAI}>
+    <>
       <Row>
         <Col xs={11}>
           <SpaceIcon />
@@ -120,7 +142,7 @@ export default function Welcome() {
               กรุณากรอกข้อมูลให้ครบถ้วน
             </p>
             <Row>
-              <Col>
+              <Col data-aos="fade-right" data-aos-delay="300">
                 <input
                   type="text"
                   placeholder="รหัสนักศึกษา"
@@ -130,7 +152,7 @@ export default function Welcome() {
                   value={idStudent}
                 />
               </Col>
-              <Col>
+              <Col data-aos="fade-left" data-aos-delay="600">
                 <input
                   type="text"
                   placeholder="ชื่อ - สกุล"
@@ -142,6 +164,8 @@ export default function Welcome() {
               </Col>
             </Row>
             <input
+              data-aos="fade-up"
+              data-aos-delay="1000"
               type="text"
               className="form-control"
               placeholder="E-mail"
@@ -149,7 +173,7 @@ export default function Welcome() {
               onChange={(e) => setEmail(e.target.value)}
               value={email}
             />
-            <Row className="mt-4">
+            <Row className="mt-4" data-aos="flip-up" data-aos-delay="1500">
               <Col xs={5}>
                 <Icons className="mt-2 " icon={VoiceIcon} alt="VoiceIcon" />
                 <span
@@ -168,10 +192,18 @@ export default function Welcome() {
             </Row>
           </Container>
         </Col>
-        <Col xs={6} className="text-center" onClick={handleClick}>
+        <Col
+          xs={6}
+          className="text-center"
+          data-aos="fade-up"
+          data-aos-anchor-placement="top-center"
+          onClick={handleClick}
+          data-aos-delay="50"
+          data-aos-duration="1000"
+        >
           <Icons icon={AI} alt="AI" />
         </Col>
       </Row>
-    </div>
+    </>
   );
 }

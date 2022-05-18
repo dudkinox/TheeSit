@@ -37,6 +37,13 @@ body {
   background-size: cover;
 }
 
+#AnimationDefaultWelcome {
+  background-image: url("assets/Anatomy/นั่ง+1.svg");
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 @keyframes animationAI {
   0.0% {
     background-image: url("assets/svg/นั่ง1.svg");

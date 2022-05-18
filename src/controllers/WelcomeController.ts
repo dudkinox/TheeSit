@@ -4,7 +4,8 @@ const WelcomeController = {
   TextToSpeech(
     text: string,
     setAnimationAI: React.Dispatch<React.SetStateAction<string>>,
-    delay: number
+    delay: number,
+    wordingEnd: string
   ) {
     const synth = window.speechSynthesis;
     const utterThis = new SpeechSynthesisUtterance();
@@ -13,7 +14,7 @@ const WelcomeController = {
     utterThis.text = text;
     synth.speak(utterThis);
     setTimeout(() => {
-      setAnimationAI("AnimationDefault");
+      setAnimationAI(wordingEnd);
     }, delay);
   },
   goQuestions(
@@ -34,7 +35,8 @@ const WelcomeController = {
       WelcomeController.TextToSpeech(
         "กรุณา กรอกข้อมูลให้ครบถ้วน ก่อนเริ่มสัมภาษณ์ครับ",
         setAnimationAI,
-        delay
+        delay,
+        "AnimationDefaultWelcome"
       );
     }
   },
