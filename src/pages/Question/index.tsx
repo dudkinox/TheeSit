@@ -12,6 +12,7 @@ import QuestionsList from "../../controllers/QuestionController";
 import WelcomeController from "../../controllers/WelcomeController";
 import EmailService from "../../services/email.service";
 import { useLocation, useNavigate } from "react-router-dom";
+import SaveBaseService from "../../services/saveBase.service";
 
 export default function QuestionPage() {
   const { transcript, listening, resetTranscript } = useSpeechRecognition();
@@ -26,7 +27,6 @@ export default function QuestionPage() {
   const handleClick = () => {
     setAnimationAI("AnimationAI");
     var timer = 0;
-    console.log(numberQuestion);
 
     switch (numberQuestion) {
       case 0:
@@ -69,15 +69,28 @@ export default function QuestionPage() {
   };
 
   const sendEmail = () => {
-    const email = state as { email: string };
+    const stateUs = state as {
+      email: string;
+      idStudent: string;
+      nameStudent: string;
+    };
     let sum = "";
     if (point >= 45) {
       sum = "ผ่านเกณฑ์ประเมิน";
     } else {
       sum = "ไม่ผ่านเกณฑ์ประเมิน";
     }
-    EmailService.sendEmail(major, email.email, sum).then((res) => {
-      navigator("/finish");
+    SaveBaseService.saveData(
+      stateUs.idStudent,
+      stateUs.nameStudent,
+      major,
+      sum
+    ).then((res) => {
+      if (res) {
+        EmailService.sendEmail(major, stateUs.email, sum).then((res) => {
+          navigator("/finish");
+        });
+      }
     });
   };
 

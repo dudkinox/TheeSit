@@ -29,6 +29,8 @@ const WelcomeController = {
       navigate("/questions", {
         state: {
           email: email,
+          idStudent: idStudent,
+          nameStudent: nameStudent,
         },
       });
     } else {

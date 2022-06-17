@@ -1,16 +1,19 @@
-"use strict";
-
 const dotenv = require("dotenv");
 dotenv.config();
 
+const firebase = require("../db");
+const firestore = firebase.firestore();
+
 const saveBase = async (req, res, next) => {
   try {
-    const { user } = req;
-    const { id } = user;
+    await firestore.collection("data").set({
+      id: req.params.id,
+      name: req.body.name,
+      major: req.body.major,
+      sum: req.body.sum,
+    });
 
-    const baseSaved = await Base.findOne({ where: { id } });
-
-    return res.status(200).send("บันทึก สำเร็จ");
+    return res.status(200).send("success");
   } catch (error) {
     res.status(400).send(error.message);
   }

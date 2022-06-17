@@ -11,7 +11,7 @@ router.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 // send email
 router.post("/send-email", sendEmail);
 // save base
-router.get("/save-base", saveBase);
+router.post("/save-base", saveBase);
 
 module.exports = {
   routes: router,
