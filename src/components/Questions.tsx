@@ -17,7 +17,6 @@ export default function Questions({
   point,
   no,
   setPoint,
-  major,
   setMajor,
   transcript,
 }: QuestionsProps) {
@@ -169,7 +168,7 @@ export default function Questions({
           </FloatingLabel>
         </Form.Group>
       </Form>
-      {point > 0 ? (
+      {/* {point > 0 ? (
         <p className="bg-danger text-white w-25">คะแนน = {point}</p>
       ) : (
         <></>
@@ -180,7 +179,7 @@ export default function Questions({
         </p>
       ) : (
         <></>
-      )}
+      )} */}
     </>
   );
 }
