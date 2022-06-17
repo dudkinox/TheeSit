@@ -121,9 +121,6 @@ export default function QuestionPage() {
         <Row className="h-50">
           <Col xs={12} className="text-center">
             <Button
-              data-aos={numberQuestion === 0 ? "fade-up" : ""}
-              data-aos-duration={numberQuestion === 0 ? "1000" : ""}
-              data-aos-delay={numberQuestion === 0 ? "500" : ""}
               variant={numberQuestion === 9 ? "success" : "primary"}
               className="col-4"
               onClick={() => {
