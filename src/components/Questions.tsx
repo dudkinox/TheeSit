@@ -59,6 +59,8 @@ export default function Questions({
       DetectNumberService.getDetectNumber(formatComma).then((res) => {
         for (var i = 0; i < res.types.length; i++) {
           if (res.types[i] === 2) {
+            // to do
+            // กำหนกช่วง
             for (var j = 0; j <= i; j++) {
               setPoint(point + Number(res.tokens[j]) / 360000);
             }
@@ -68,6 +70,7 @@ export default function Questions({
     }
   };
   const processQuestion6 = (value: string) => {
+    // todo ความพิการ
     if (value !== "") {
       DetectClassificationService.getDetectClassification(value, "5").then(
         (res) => {
@@ -147,6 +150,7 @@ export default function Questions({
         if (!listening) processQuestion9(transcript);
         break;
       case "10":
+        // todo ยืนยัน
         if (!listening) processQuestion10(transcript);
         break;
     }

@@ -80,6 +80,12 @@ export default function QuestionPage() {
     } else {
       sum = "ไม่ผ่านเกณฑ์ประเมิน";
     }
+    WelcomeController.TextToSpeech(
+      "คำถามสุดท้ายเพื่อยืนยันการสัมภาษณ์ท่านผู้เข้าสอบ ยืนยันการสัมภาษณ์ครั้งนี้ใช่ไหมครับ",
+      setAnimationAI,
+      5000,
+      "AnimationDefault"
+    );
     SaveBaseService.saveData(
       stateUs.idStudent,
       stateUs.nameStudent,
