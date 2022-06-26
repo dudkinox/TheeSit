@@ -25,7 +25,7 @@ export default function Welcome() {
   const navigate = useNavigate();
   const [AI, setAI] = useState(AInormal);
   const [speak, setSpeak] = useState(false);
-  const [AnimationAI, setAnimationAI] = useState("AnimationDefaultWelcome");
+  const [, setAnimationAI] = useState("AnimationDefaultWelcome");
 
   const handleClick = () => {
     setSpeak(true);

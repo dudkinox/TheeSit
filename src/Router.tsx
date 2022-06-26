@@ -11,6 +11,7 @@ function Router() {
         <Route path="/" element={<Welcome />} />
         <Route path="/questions" element={<QuestionPage />} />
         <Route path="/finish" element={<FinishPage />} />
+        <Route path="/admin" element={<AdminPage />} />
       </Routes>
     </BrowserRouter>
   );
