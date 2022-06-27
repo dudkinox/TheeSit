@@ -12,7 +12,7 @@ import QuestionsList from "../../controllers/QuestionController";
 import WelcomeController from "../../controllers/WelcomeController";
 import EmailService from "../../services/email.service";
 import { useLocation, useNavigate } from "react-router-dom";
-import SaveBaseService from "../../services/saveBase.service";
+import DataStudentService from "../../services/saveBase.service";
 
 export default function QuestionPage() {
   const { transcript, listening, resetTranscript } = useSpeechRecognition();
@@ -86,7 +86,7 @@ export default function QuestionPage() {
       5000,
       "AnimationDefault"
     );
-    SaveBaseService.saveData(
+    DataStudentService.saveData(
       stateUs.idStudent,
       stateUs.nameStudent,
       major,

@@ -1,6 +1,7 @@
 import axiosInstance from "../http/backend";
+import dataStudentModel from "../models/dataStudentModel";
 
-const SaveBaseService = {
+const DataStudentService = {
   saveData: (ids: any, names: any, majors: string, sums: string) => {
     return axiosInstance
       .post<any>("/api/save-base", {
@@ -11,6 +12,11 @@ const SaveBaseService = {
       })
       .then((response) => response.data);
   },
+  getDataStudent: () => {
+    return axiosInstance
+      .get<dataStudentModel[]>("/api/all-data")
+      .then((response) => response.data);
+  },
 };
 
-export default SaveBaseService;
+export default DataStudentService;

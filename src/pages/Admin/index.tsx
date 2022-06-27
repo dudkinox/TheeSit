@@ -1,44 +1,67 @@
-import { Col, Container, Row } from "react-bootstrap";
+import { useEffect } from "react";
+import { Container } from "react-bootstrap";
+import { useLocation, useNavigate } from "react-router-dom";
+import accountModel from "../../models/accountModel";
+import dataStudentModel from "../../models/dataStudentModel";
+import AccountService from "../../services/account.service";
 
 export default function AdminPage() {
+  const username = window.sessionStorage.getItem("username");
+  const password = window.sessionStorage.getItem("password");
+  const { state } = useLocation() as any;
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!username || !password) {
+      navigate("/login");
+    }
+    AccountService.getLoginAdmin(username, password)
+      .then((res: accountModel) => {
+        if (res.username === null || res.password === null) {
+          navigate("/login");
+        }
+      })
+      .catch(() => {
+        navigate("/login");
+      });
+  }, [username, password, navigate]);
+
   return (
-    <div className="text-center">
-      <Container>
-        <Row>
-          <Col></Col>
-          <Col xs={6}>
-            <form>
-              <div className="form-outline mb-4">
-                <input
-                  type="email"
-                  id="form2Example1"
-                  className="form-control"
-                />
-                <label className="form-label" htmlFor="form2Example1">
-                  Username
-                </label>
-              </div>
-              <div className="form-outline mb-4">
-                <input
-                  type="password"
-                  id="form2Example2"
-                  className="form-control"
-                />
-                <label className="form-label" htmlFor="form2Example2">
-                  Password
-                </label>
-              </div>
-              <button
-                type="button"
-                className="btn btn-primary btn-block mb-4 col-6"
-              >
-                Sign in
-              </button>
-            </form>
-          </Col>
-          <Col></Col>
-        </Row>
+    <>
+      <link
+        rel="stylesheet"
+        href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"
+      />
+      <link
+        rel="stylesheet"
+        href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css"
+      />
+      <Container fluid="md mt-5">
+        <table
+          id="example"
+          className="display nowrap table table-striped table-dark"
+          style={{ width: "100%" }}
+        >
+          <thead>
+            <tr>
+              <th>ID STUDENT</th>
+              <th>NAME LASTNAME</th>
+              <th>MAJOR</th>
+              <th>TOTAL</th>
+            </tr>
+          </thead>
+          <tbody>
+            {state.map((item: dataStudentModel) => (
+              <tr key={item.id}>
+                <td>{item.id}</td>
+                <td>{item.name}</td>
+                <td>{item.major}</td>
+                <td>{item.sum ? "ผ่านเกณฑ์" : "ไม่ผ่านเกณฑ์"}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </Container>
-    </div>
+    </>
   );
 }
