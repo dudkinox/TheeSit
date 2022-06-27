@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Welcome from "./pages/Welcome";
 import QuestionPage from "./pages/Question";
 import FinishPage from "./pages/FinishPage";
+import AdminPage from "./pages/Admin";
 
 function Router() {
   return (
