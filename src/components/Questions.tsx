@@ -59,7 +59,7 @@ export default function Questions({
       DetectNumberService.getDetectNumber(formatComma).then((res) => {
         for (var i = 0; i < res.types.length; i++) {
           if (res.types[i] === 2) {
-            // to do
+            // todo
             // กำหนกช่วง
             for (var j = 0; j <= i; j++) {
               setPoint(point + Number(res.tokens[j]) / 360000);
@@ -70,20 +70,22 @@ export default function Questions({
     }
   };
   const processQuestion6 = (value: string) => {
-    // todo ความพิการ
-    if (value !== "") {
-      DetectClassificationService.getDetectClassification(value, "5").then(
-        (res) => {
-          for (var i = 0; i < res.tags.length; i++) {
-            if (res.tags[i].tag.includes("งาน")) {
-              setPoint(point + 1);
-              console.log(res.tags[i].tag);
-              break;
-            }
+    DetectClassificationService.getDetectClassification(value, "10").then(
+      (res) => {
+        for (var i = 0; i < res.tags.length; i++) {
+          if (res.tags[i].tag.includes("งาน")) {
+            setPoint(point + 1);
+            console.log(res.tags[i].tag);
+            break;
+          }
+          if (res.tags[i].tag.includes("พิการ")) {
+            setPoint(point + 1);
+            console.log(res.tags[i].tag);
+            break;
           }
         }
-      );
-    }
+      }
+    );
   };
   const processQuestion7 = (value: string) => {
     if (value !== "") setMajor(value);
@@ -172,18 +174,6 @@ export default function Questions({
           </FloatingLabel>
         </Form.Group>
       </Form>
-      {/* {point > 0 ? (
-        <p className="bg-danger text-white w-25">คะแนน = {point}</p>
-      ) : (
-        <></>
-      )}
-      {major !== "" ? (
-        <p className="bg-danger text-white w-25 position-absolute">
-          สาขาที่เรียน: {major}
-        </p>
-      ) : (
-        <></>
-      )} */}
     </>
   );
 }
